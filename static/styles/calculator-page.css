@@ -1,0 +1,225 @@
+/*
+Author of this file: Aaron Cunningham
+ */
+
+.calculator-options {
+    display: flex;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .calculator-options > li {
+    display: flex;
+    padding: 0 50px;
+    background-color: #ffffff;
+    color: black;
+  }
+
+  .calculate-link{
+    display: flex; justify-content: flex-end; margin-right: 9.4rem
+  }
+  .calculator-main-container {
+    display: flex;
+    justify-content: center;
+  }
+  .form {
+    padding-left: 5rem;
+  }
+  .radio-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .flash-message-error {
+    color: #eb2632;
+    font-weight: bold;
+    display: none;
+    margin-top: 10px;
+    font-size: medium;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
+  }
+  .error-message-div {
+    display: flex;
+    justify-content: center;
+  }
+  .flash-message-success {
+    color: #28a745;
+    font-weight: bold;
+    display: none;
+    margin-top: 10px;
+    font-size:medium;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  /* AI Generated */
+  .radio-buttons input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: white;
+  }
+  /* AI Generated */
+  .radio-buttons input[type="radio"]:checked {
+    background-color: black;
+  }
+
+  .page-img {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5rem;
+  }
+
+  .container-calc-page {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .calculator-main-trip {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .calculator-main-trip > span {
+    font-size: 70px;
+    color: black;
+  }
+
+  .grid-calc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .results {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+  .rounded {
+    border-top: 8px solid #bbb;
+    border-radius: 5px;
+  }
+  #map {
+    height: 300px;
+    width: 495px;
+    margin-left: 5rem;
+  }
+  .submit {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .calculator-main {
+    background-color: #036179;
+    width: 1049px;
+    height: 750px;
+    border-radius: 0px 23px 23px 23px;
+  }
+
+  .results-container{
+    grid-template-columns: 1fr 1fr; 
+    display: grid
+  }
+
+
+  .calculator-options {
+    display: flex;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .calculator-options > li {
+    display: flex;
+    padding: 0 50px;
+    background-color: #ffffff;
+    color: black;
+  }
+  .calculator-options > li > a {
+
+    color: black;
+  }
+  @media (max-width: 1200px) {
+    .calculator-main{
+        width: 700px;
+        height: 1200px;
+        margin-bottom: 2rem;
+    }
+    .calculator-options{
+        flex-direction: column;
+    }
+    .calculator-options > li{
+        justify-content: center;
+    }
+    .page-img{
+        display: none;
+    }
+    .results-container{
+        grid-template-columns: 1fr; 
+        
+    }
+    .results{
+        margin-top: 2rem;
+    }
+
+
+  }
+
+  @media (max-width: 992px) {
+    .calculator-main{
+        width: 560px;
+        height: 1200px;
+        margin-bottom: 2rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0rem;
+        margin-left: 2rem;
+      }
+      .results-container{
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      #map {
+        height: 300px;
+        width: 93%; 
+        margin: 0 auto; 
+        margin-bottom: 2rem; 
+      }
+  }
+
+  @media (max-width: 576px) {
+    .calculator-main{
+        width: 460px;
+        height: 1240px;
+        margin-bottom: 2rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+
+      .calculator-main-trip {
+        display: flex;
+        align-items: center;
+        gap: 0rem;
+      }
+  }

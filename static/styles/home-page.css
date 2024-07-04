@@ -1,0 +1,129 @@
+/*
+Author of this file: Lauren Harbige
+ */
+.home-plane-img {
+    top: 9%;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.info-title {
+    text-decoration: underline;
+    font-weight: bold;
+    text-underline-offset: 0.2em;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.register-link {
+    text-decoration: underline;
+    font-weight: bold;
+    font-style: italic;
+    cursor: pointer;
+    text-decoration-color: #4ba847;
+    color:#4ba847;
+}
+
+.text-and-leaderboard{
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    color: black;
+    padding: 5px;
+  }
+
+  th {
+    background-color: #4ba847;
+  }
+
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #ebebeb;
+  }
+
+#tablePages {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#tablePages button {
+    margin: 2px;
+    padding: 5px 10px;
+    background-color: #4ba847;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#tablePages button.active {
+    background-color: #333;
+}
+
+.climate-title {
+    text-decoration: underline;
+    font-weight: bold;
+    text-underline-offset: 0.2em;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.climate-text {
+    width: 100%;
+    margin-bottom: 40px;
+    margin-right: 20px;
+}
+
+.percent-img,
+.irreversible-img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.percent-img {
+    margin-right: 250px;
+}
+
+.irreversible-img {
+    margin-left: 250px;
+}
+
+
+.img-container-home{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.percent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.percent > p {
+    width: 60%;
+    align-items: center;
+}
+
+.percent-img {
+    display: block;
+    margin: 0 auto; 
+    margin-bottom: 2rem;
+}
+

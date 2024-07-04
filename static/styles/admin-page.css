@@ -1,0 +1,44 @@
+/*
+Author of this file: Lauren Harbige
+ */
+
+.title-container {
+    display: flex;
+    justify-content: center;
+}
+.page-title {
+    margin-top: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    max-width: 500px;
+    margin: 0rem auto;
+}
+
+.boxing {
+    border: 2px;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    background-color: #036179;
+    margin: 5rem auto;
+    border-radius: 10px;
+  }
+  @media (max-width: 800px) {
+    .form-style {
+      width: 400px;
+    }
+  }
+
+.add-admin {
+    padding-top: 1rem;
+}
+
+#newUsers {
+    margin-right: 1rem;
+}

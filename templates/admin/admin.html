@@ -1,0 +1,86 @@
+{% extends "base.html" %} {% block content %}
+<!--
+
+  Page author: Lauren Harbige
+  
+-->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='styles/admin-page.css') }}"
+/>
+<div>
+    <div class="title-container">
+        <h1 class="page-title">Welcome <a>{{ name }}</a> to the Admin panel</h1>
+    </div>
+    <div class="chart-container">
+        <div class="my-chart">
+            <canvas id="usersChart" style="position: relative"></canvas>
+        </div>
+        <p class="users-info">
+            New users this month: <span id="newUsers"></span> <span id="usersPercent"></span>
+        </p>
+    </div>
+      <div class="column is-5 is-offset-4 boxing">
+        <div class="">
+          {% with messages = get_flashed_messages() %} {% if messages %}
+          <div style="
+          font-style: italic;
+          display: flex;
+          justify-content: center;
+          font-weight: bold;
+        " class="notification is-danger">{{ messages[0] }}</div>
+          {% endif %} {% endwith %}
+
+
+        <div class="form-group">
+            <div style="max-width: 450px" class="mx-auto form-style">
+                <label >View User Logs</label>
+                <a class="btn btn-success form-control" href="{{ url_for('admin.logs_form_helper') }}">Logs</a>
+            </div>
+        </div>
+
+        <form method="POST" class="mx-auto form-style" style="max-width: 450px">
+            {{ ban_form.csrf_token() }}
+            <div class="form-group">
+                <label >Ban a user</label>
+                <div class="control">
+                    {{ ban_form.account_number(class="form-control", placeholder="Enter user account number") }}
+                    {% for error in ban_form.account_number.errors %} {{ error }} {% endfor %}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100" name="ban">Ban user</button>
+        </form>
+        <form method="POST" class="mx-auto form-style" style="max-width: 450px; margin-top: 1rem;">
+          {{ unban_form.csrf_token() }}
+          <div class="form-group">
+              <label >Unban a user</label>
+              <div class="control">
+                  {{ unban_form.account_number(class="form-control", placeholder="Enter user account number") }}
+                  {% for error in unban_form.account_number.errors %} {{ error }} {% endfor %}
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success w-100" name="unban">Unban user</button>
+      </form>
+        
+        
+          <div style="max-width: 450px; margin-top: 1rem;" class="mx-auto form-style"> 
+            <label for="exampleInputPassword1">Add an admin</label>
+            <div class="form-group control" style="display: flex; justify-content: center;">
+              
+              <a class="btn btn-success form-control" href="{{ url_for('users.admin_register') }}">Register Admin</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='javascript/adminPage/adminGraph.js') }}"
+></script>
+
+{% endblock %}

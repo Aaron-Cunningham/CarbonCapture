@@ -1,0 +1,25 @@
+# In our first sprint we used docker to containerize our application but ran into errors
+
+services:
+  server:
+    build: .
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+
+  database:
+    image: mysql
+    restart: always
+    user: mysql 
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+    - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password 
+      
+volumes:
+  db-data:
+
+# Author: James Whitley

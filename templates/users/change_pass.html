@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block content %}
+<!--
+  Page author: Lauren Harbige
+-->
+<style>
+  .boxing {
+    border: 2px;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    background-color: #036179;
+    margin: 5rem auto;
+    border-radius: 10px;
+  }
+  @media (max-width: 800px) {
+    .form-style {
+      width: 400px;
+    }
+  }
+</style>
+<div class="column is-5 is-offset-4 boxing">
+  <div class="d-flex justify-content-center" style="padding-top: 50px">
+    <h3 class="title is-3">Change Password</h3>
+  </div>
+  <div style="">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        font-style: italic;
+      "
+      class="notification is-danger"
+      class="notification is-danger"
+    >
+      {{ messages[0] }}
+    </div>
+    {% endif %} {% endwith %}
+    <form method="POST" class="mx-auto form-style" style="max-width: 450px">
+      {{ form.csrf_token() }}
+      <label for="exampleInputPassword1">Current Password *</label>
+      <div class="form-group">
+        {{ form.current_pass(class="form-control", placeholder="Current
+        Password") }} {% for error in form.current_pass.errors %} {{ error }} {%
+        endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">New Password *</label>
+        <div class="control">
+          {{ form.new_pass(class="form-control", placeholder="New Password") }}
+          {% for error in form.new_pass.errors %} {{ error }} {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Confirm Password *</label>
+        <div class="control">
+          {{ form.confirm_pass(class="form-control", placeholder="Confirm
+          Password") }} {% for error in form.confirm_pass.errors %} {{ error }}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div>{{ form.submit(class="btn btn-success w-100" ) }}</div>
+      <br />
+      <p style="color: #cccccc">All fields are required*</p>
+    </form>
+  </div>
+</div>
+{% endblock %}

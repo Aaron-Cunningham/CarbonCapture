@@ -1,0 +1,90 @@
+{% extends "base.html" %} {% block content %}
+<!--
+
+  Page author: Lauren Harbige
+-->
+<style>
+  .boxing {
+    border: 2px;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    background-color: #036179;
+    margin: 5rem auto;
+    border-radius: 10px;
+  }
+  @media (max-width: 800px) {
+    .form-style {
+      width: 400px;
+    }
+  }
+</style>
+<div class="column is-5 is-offset-4 boxing">
+  <div class="d-flex justify-content-center" style="padding-top: 50px">
+    <h3 class="title is-3">User Logs</h3>
+  </div>
+  <div style="">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        font-style: italic;
+      "
+      class="notification is-danger"
+      class="notification is-danger"
+    >
+      {{ messages[0] }}
+    </div>
+    {% endif %} {% endwith %}
+
+    <div class="box">
+      {% if logs %}
+      <div class="field">
+        <table class="table">
+          <tr style="display: flex; justify-content: center">
+            <th>Most Recent Security Log Entries</th>
+          </tr>
+          {% for entry in logs %}
+          <tr>
+            <td>{{ entry }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No logs found.</p>
+        {% endif %}
+      </div>
+      <div style="margin-bottom: 1rem; margin-left: 1rem">
+        <!-- Code referenced from AI -->
+        {% if page > 1 %}
+        <a
+          href="{{ url_for('admin.logs_form_helper', page=page-1) }}"
+          class="btn btn-success"
+          >Previous</a
+        >
+        {% endif %} Page {{ page }} of {{ total_pages }} {% if page <
+        total_pages %}
+        <a
+          href="{{ url_for('admin.logs_form_helper', page=page+1) }}"
+          class="btn btn-success"
+          >Next</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div style="margin-left: 1rem">
+    <button
+      onclick="window.location.href='{{ url_for('admin.admin') }}'"
+      class="btn btn-success"
+      style="max-width: 450px; margin-bottom: 5px"
+    >
+      Back to admin page
+    </button>
+  </div>
+</div>
+{% endblock %}

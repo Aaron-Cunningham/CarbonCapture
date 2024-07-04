@@ -1,0 +1,149 @@
+{% extends "base.html" %} {% block content %}
+<!--
+  Page author: Aaron Cunningham
+-->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='styles/account-page.css') }}"
+/>
+<div class="container-account">
+  <div class="my-account-container">
+    <h2
+      style="
+        text-decoration: underline;
+        text-underline-offset: 0.4em;
+        text-align: center;
+      "
+    >
+      My Account
+    </h2>
+    <div class="account-details">
+      <p class="info">First Name:</p>
+      <p class="info">{{firstname}}</p>
+    </div>
+    <div class="account-details">
+      <p class="info">Last Name:</p>
+      <p class="info-value">{{lastname}}</p>
+    </div>
+    <div class="account-details">
+      <p class="info">Phone:</p>
+      <p class="info-value">{{phone}}</p>
+    </div>
+    <div class="account-details">
+      <p class="info">Email:</p>
+      <p class="info-value">{{email}}</p>
+    </div>
+    <div>
+      <!--Change password button-->
+      <button
+        onclick="window.location.href='{{ url_for('users.change_password') }}'"
+        class="btn btn-success"
+        style="width: 400px; margin-bottom: 5px"
+      >
+        Change Password
+      </button>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div style="display: flex; justify-content: center">
+        <p style="font-size: 20px; font-weight: bold; color: #34d399">
+          {{ messages[0] }}
+        </p>
+      </div>
+      {% endif %} {% endwith %}
+    </div>
+    <div>
+      <button
+        onclick="openDeletePrompt()"
+        class="btn btn-danger"
+        style="width: 400px"
+        href=""
+      >
+        Delete Account
+      </button>
+    </div>
+
+    <div class="total-container">
+      <div style="margin-top: 3rem">
+        <p>Total CO2 Consumption this year:</p>
+        <p>{{totalConsumption}} kg</p>
+        <p>Most Eco Friendly journey:</p>
+        <p>{{mostEcoFriendly}} kg</p>
+        <p>Least Eco Friendly journey:</p>
+        <p>{{leastEcoFriendly}} kg</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2
+      style="
+        text-underline-offset: 0.4em;
+        text-decoration: underline;
+        text-align: center;
+      "
+      id="title"
+    >Emissions Graph</h2>
+    <div class="my-chart">
+      <canvas id="transportChart" style="position: relative"></canvas>
+      <canvas
+        id="emissionsChart"
+        style="position: relative; display: none"
+      ></canvas>
+      <!--emissions graph button-->
+      <button
+        id="emissionsButton"
+        class="graph-button"
+        onclick="toggleEmissions()"
+      >
+        Emissions Graph
+      </button>
+      <!--transport graph button-->
+      <button
+        id="transportButton"
+        class="graph-button"
+        onclick="toggleTransport()"
+      >
+        Transport Graph
+      </button>
+    </div>
+  </div>
+
+  <img
+    class="account-img"
+    src="{{ url_for('static', filename='happy-earth.png') }}"
+    alt="Smiling earth"
+  />
+  <div id="deleteAccount" class="delete-prompt">
+    <p style="color: black">Are you sure you want to delete your account?</p>
+    <p style="color: red">This action is irreversible</p>
+    <div class="delete-btn" style="display: flex; justify-content: center">
+    <button
+      class="btn-success"
+      style="
+        border: none;
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-top: 3.5px;
+        border-radius: 5px;
+      "
+      onclick="closeDeletePrompt()"
+    >
+      No
+    </button>
+    <form method="POST">
+      {{ form.csrf_token() }}
+      
+        {{ form.confirmDeletion(class="btn-danger", style="border: none; padding-right: 15px; padding-left: 15px; padding-top: 3.5px; border-radius: 5px;") }}
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='javascript/accountPage/accountGraph.js') }}"
+></script>
+
+{% endblock %}

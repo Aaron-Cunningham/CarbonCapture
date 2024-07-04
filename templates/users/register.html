@@ -1,0 +1,84 @@
+{% extends "base.html" %} {% block content %}
+<!--
+  Page author: Aaron Cunningham
+-->
+<style>
+  .boxing {
+    border: 2px;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    background-color: #036179;
+    margin: 5rem auto;
+    border-radius: 10px;
+  }
+  @media (max-width: 800px) {
+    .form-style {
+      width: 400px;
+    }
+  }
+</style>
+<div class="column is-5 is-offset-4 boxing">
+  <div class="d-flex justify-content-center" style="padding-top: 50px">
+    <h3 class="title is-3">Register</h3>
+  </div>
+
+  <div class="box">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div
+      style="
+        font-style: italic;
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+      "
+      class="notification is-danger"
+    >
+      {{ messages[0] }}
+    </div>
+    {% endif %} {% endwith %}
+    <form method="POST" class="mx-auto form-style" style="max-width: 450px">
+      <div class="form-group">
+        {{ form.csrf_token() }}
+        <label for="exampleInputEmail1">Email address *</label>
+        {{ form.email(class="form-control", id="exampleInputEmail1",
+        placeholder="Enter email") }} {% for error in form.email.errors %} {{
+        error }} {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">First name *</label>
+        {{ form.firstname(class="form-control", placeholder="First Name") }} {%
+        for error in form.firstname.errors %} {{ error }} {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Last Name *</label>
+        {{ form.lastname(class="form-control", id="exampleInputEmail1",
+        placeholder="Last Name") }} {% for error in form.lastname.errors %} {{
+        error }} {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Phone *</label>
+        {{ form.phone(class="form-control", id="exampleInputEmail1",
+        placeholder="Phone Number") }} {% for error in form.phone.errors %} {{
+        error }} {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Password *</label>
+        {{ form.password(class="form-control", id="exampleInputEmail1",
+        placeholder="Password") }} {% for error in form.password.errors %} {{
+        error }} {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Confirm Password *</label>
+        {{ form.confirm_password(class="form-control", id="exampleInputEmail1",
+        placeholder="Confirm Password") }} {% for error in
+        form.confirm_password.errors %} {{ error }} {% endfor %}
+      </div>
+      <div>{{ form.submit(class="btn btn-success w-100" ) }}</div>
+      <br />
+      <p style="color: #cccccc">All fields are required*</p>
+    </form>
+  </div>
+</div>
+{% endblock %}

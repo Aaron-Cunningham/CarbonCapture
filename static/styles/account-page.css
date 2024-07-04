@@ -1,0 +1,85 @@
+/*
+Author of this file: Aaron Cunningham
+ */
+
+.hidden {
+    display: none;
+  }
+  .container-account {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    justify-items: center;
+    padding-top: 8rem;
+  }
+
+  .account-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .graph-button {
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+  }
+
+  .info,
+  .info-value {
+    font-size: large;
+
+    min-width: 120px;
+  }
+  .info-value {
+    flex-grow: 1;
+    text-align: left;
+  }
+  .total-container {
+    font-size: x-large;
+  }
+  .account-img {
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+    z-index: -1;
+  }
+  .my-chart {
+    height: 700px;
+    width: 500px;
+  }
+
+  @media (max-width: 1400px) {
+    .container-account {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .account-img {
+      display: none;
+    }
+    .my-chart {
+      height: 600px;
+      width: 430px;
+    }
+  }
+  .delete-prompt {
+    position: absolute;
+    display: none;
+    padding: 50px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f2f2f2;
+    border-radius: 29px;
+    text-align: center;
+  }
+  .delete-btn {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+  }
+  .my-account-container {
+    background-color: #036179;
+    padding: 2rem;
+    border-radius: 10px;
+  }

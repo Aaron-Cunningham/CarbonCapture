@@ -1,0 +1,164 @@
+{% extends "base.html" %} {% block content %}
+<!--
+  Page author: Aaron Cunningham
+-->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='styles/calculator-page.css') }}"
+/>
+<div id="mode" style="display: none">FLIGHT</div>
+<div class="container-calc-page">
+  <h1 style="display: flex; justify-content: center; margin-top: 3rem">
+    Calculator
+  </h1>
+
+  <div class="calculator-main">
+    <ul class="calculator-options">
+      <li>
+        <a href="{{url_for('calculator.car')}}">Car</a>
+      </li>
+      <li style="background-color: green">
+        <a href="{{url_for('calculator.plane')}}">Flight</a>
+      </li>
+
+      <li>
+        <a href="{{url_for('calculator.train')}}">Train</a>
+      </li>
+      <li><a href="{{url_for('calculator.motorbike')}}">Motorbike</a></li>
+      <li><a href="{{url_for('calculator.bus')}}">Bus</a></li>
+    </ul>
+    <div class="grid-calc">
+      <form method="POST" class="form" id="flightForm">
+        <div class="radio-buttons">
+          <input type="radio" id="one_way" name="trip_type" value="One way" />
+          <label for="one_way">One way</label>
+          <input
+            type="radio"
+            id="round_trip"
+            name="trip_type"
+            value="Round Trip"
+          />
+          <label for="round_trip">Round trip</label>
+        </div>
+        <div class="radio-buttons">
+          <input type="radio" id="Economy" name="fuel_type" value="Economy" />
+          <label for="Economy">Economy Class</label>
+          <input
+            type="radio"
+            id="premium"
+            name="fuel_type"
+            value="Premium Class"
+          />
+          <label for="premium">Business</label>
+
+          <input type="radio" id="first" name="fuel_type" value="First Class" />
+          <label for="first">First Class</label>
+        </div>
+        <div class="error-message-div">
+          <span id="flash-message-success" class="flash-message-success"></span>
+          <span id="flash-message-error" class="flash-message-error"></span>
+        </div>
+
+        <div class="calculator-main-trip">
+          <div class="">
+            <input
+              style="color: black"
+              type="text"
+              name="start_destination"
+              class="form-group"
+              id="from"
+              placeholder="Start Destination"
+            />
+          </div>
+          <span>&#8594;</span>
+          <div>
+            <input
+              style="color: black"
+              type="text"
+              name="end_destination"
+              class="form-group"
+              id="to"
+              placeholder="End Destination"
+            />
+          </div>
+        </div>
+
+        <div class="submit">
+          <div>
+            <button
+              class="button is-info is-centered"
+              style="
+                background: #28a745;
+                border: 1px solid #28a745;
+                border-radius: 4px;
+                padding-left: 3rem;
+                padding-right: 3rem;
+              "
+              type="button"
+              id="calculateButton"
+              disabled
+            >
+              Calculate
+            </button>
+            <span id="formError"
+              >Please fill in all the fields before calculating</span
+            >
+          </div>
+        </div>
+      </form>
+
+      <div>
+        <div class="page-img">
+          <img
+            src="{{ url_for('static', filename='plane-img.png') }}"
+            alt="train"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="results-container">
+      <div id="map"></div>
+      <div id="results" class="results">
+        <h2 style="font-size: 24px">Calculations:</h2>
+        <p>From:</p>
+        <p>To:</p>
+        <p>Trip Type:</p>
+        <p>Class Type:</p>
+        <p>Distance:</p>
+        <div>
+          <hr class="border" />
+        </div>
+        <p>CO2e amount:</p>
+      </div>
+    </div>
+    <div class="calculate-link">
+      <a
+        style="
+          color: white;
+          text-decoration: underline;
+          text-underline-position: under;
+        "
+        href="{{ url_for('index') }}#emissions"
+        >See how we calculate emissions here</a
+      >
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='javascript/form-control/planeForm.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='javascript/dataTransfer.js') }}"></script>
+<script src="{{ url_for('static', filename='javascript/calculator/calculations.js') }}"></script>
+<script src="{{ url_for('static', filename='javascript/calculator/displayResults.js') }}"></script>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='javascript/calculator/calculatorFlightLogic.js') }}"
+></script>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key={{API_KEY}}&libraries=geometry&callback=initMap"
+  async
+  defer
+></script>
+
+{% endblock %}

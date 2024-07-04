@@ -1,0 +1,225 @@
+{% extends "base.html" %} {% block content %}
+<!--
+  Page author: Lauren Harbige
+-->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='styles/home-page.css') }}"
+/>
+
+<div class="hero-img">
+  <img
+    class="home-plane-img"
+    src="{{ url_for('static', filename='plane-and-trees.png') }}"
+    alt="Plane in sky"
+  />
+</div>
+
+<div class="container-fluid" style="max-width: 100rem; margin: 0 auto">
+  <div class="text-and-leaderboard">
+    <div>
+      <h2 class="info-title">About us/using our website</h2>
+      <p class="website-text">
+        Our goal is to track and reduce carbon emissions at the source through
+        our calculator. We also aim to raise awareness about the ease of
+        contributing to carbon emissions and promote simple strategies for
+        reducing one's carbon footprint. Carbon Capture offers a calculator
+        designed to effectively estimate measure your carbon emissions across various
+        modes of transportation, these being: cars, aeroplanes, trains,
+        motorbikes and buses. To access the calculator, you are required to
+        register on our platform. Once calculated, you can upload each journey
+        to your profile which can be found on the account page. This will allow
+        you to track your emissions through personalised profiles and compare
+        your previous journeys with your most recent ones in terms of emissions
+        and modes of transport. Additionally, our web app features a leaderboard
+        which is shown here to the right, showcasing the top 100 users who have
+        the lowest CO2 emissions for the current month.
+        <br />Click
+        <a href="{{ url_for('users.register') }}" class="register-link">here</a>
+        to register so you can start tracking your carbon emissions!
+      </p>
+    </div>
+    <div class="leaderboard">
+      <h2 class="leaderboard-title">Leaderboard for {{month}} {{year}}</h2>
+      <table class="table">
+        <tr>
+          <th>Rank</th>
+          <th>Full Name</th>
+          <th>Total CO₂ consumption (kg)</th>
+        </tr>
+        {% for person in people %}
+        <tr>
+          <td>{{person.rank}}</td>
+          <td>{{person.fullName}}</td>
+          <td>{{person.co2Consumption}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <div>
+        <!--Code referenced from AI-->
+        {% if page > 1 %}
+        <a href="/?page={{ page - 1 }}">Previous</a>
+        {% endif %} Page {{ page }} of {{ total_pages }} {% if page <
+        total_pages %}
+        <a href="/?page={{ page + 1 }}">Next</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <h2 class="climate-title">Why do we need Carbon Capture?</h2>
+
+  <p class="climate-text">
+    The accumulation of carbon dioxide in the atmosphere is currently tipping
+    the greenhouse effect out of balance, leading to increased absorption of the
+    sun’s energy and consequent global warming. Rising temperatures are already
+    causing ice caps to melt leading to rising sea levels, as well as extreme
+    weather events like wildfires. Furthermore, it has contributed to increased
+    spreading of diseases such as malaria and disrupted food accessibility.
+    Reducing carbon emissions will help to keep the global temperature from
+    rising above 1.5°C.
+  </p>
+
+  <div class="img-container-home">
+    <div class="percent">
+      <img
+        class="percent-img"
+        src="{{ url_for('static', filename='84percent.png') }}"
+        alt="84% symbol"
+      />
+      <p>84% of carbon emissions per year are related to human activity</p>
+    </div>
+
+    <div class="percent">
+      <img
+        class="percent-img"
+        src="{{ url_for('static', filename='irreversible.png') }}"
+        alt="Irreversible symbol"
+      />
+      <p>
+        Irreversible climate changes due to carbon dioxide emissions have
+        already taken place
+      </p>
+    </div>
+  </div>
+
+  <p class="reduce-text">
+    Some easy methods to reduce your carbon footprint are: car sharing, opt for
+    public transport like the bus or train, choose walking or cycling for
+    shorter journeys, and finally when purchasing a new car, prioritise low
+    emission vehicles such as a hybrid or electric car.
+  </p>
+
+  <div id="emissions">
+    <h1 class="climate-title">How do we work out our emissions?</h1>
+    <div>
+      <h3 class="climate-title">Car Emissions</h3>
+      <p>
+        We work out our car emissions by taking the distance of the journey,
+        that is the divided by the miles per gallon (MPG). This is converted to
+        Litres and multiplied by the emissions factor for either Petrol or
+        Diesel
+      </p>
+      <p>
+        Reference for emissions factors
+        <a
+          target="_blank"
+          href="https://www.creativecarbonscotland.com/carbon-management/guidance-for-reporting-organisations/emission-factors/"
+          >Click here</a
+        >
+      </p>
+    </div>
+    <div>
+      <h3 class="climate-title">Flight emissions</h3>
+      <p>
+        We work out our flight emissions by flight classes, distance, and model
+        of aircraft (less than 2500 miles A320 Neo, greater than 2500 miles B787
+        Dreamliner)
+      </p>
+      <p>
+        We then use a load factor of 65% which takes into account the aircrafts
+        seat capacity, distance, total fuel burned, and seat class (3x more CO2
+        for business class, 4x more CO2 for first class) to work out the CO2 per
+        passenger per km The CO2 can then be worked out by multiplying the
+        distance, CO2 per passenger km, and additional emissions factors (CO2
+        emissions more green house gases in high atmosphere)
+      </p>
+      <p>
+        Reference for emissions factors
+        <a target="_blank" href="https://www.carbonindependent.org/22.html"
+          >Click here</a
+        >
+      </p>
+    </div>
+    <div>
+      <h3 class="climate-title">Train emissions</h3>
+      <p>
+        We work out our train emissions by taking the conversion factors
+        provided by the government which state the National Rail 0.0715
+        kgCO2e/pass mile
+      </p>
+      <p>
+        Reference for emissions factors
+        <a
+          target="_blank"
+          href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2021"
+          >Click here</a
+        >
+      </p>
+    </div>
+    <div>
+      <h3 class="climate-title">Motorbike emissions</h3>
+      <p>
+        We work out our motorbike emissions by taking different emission factors
+        for different sized motorbikes (Small motorbikes: under 125cc, Medium
+        motorbikes: 125cc to 500cc, Large motorbikes: over 500cc) and then
+        multiplying them by the worked out distance from the route
+      </p>
+      <p>
+        Reference for emissions factors
+        <a
+          target="_blank"
+          href="https://thrustcarbon.com/insights/how-to-calculate-motorbike-co2-emissions"
+          >Click here</a
+        >
+      </p>
+    </div>
+    <div>
+      <h3 class="climate-title">Bus emissions</h3>
+      <p>
+        The bus emissions are calculated by taking the emissions factors from
+        the government conversion factors spreadsheet to calculate the per
+        passenger mile CO2 emissions, and then multiplied by the distance
+      </p>
+      <p>
+        Reference for emissions factors
+        <a
+          target="_blank"
+          href="https://www.creativecarbonscotland.com/carbon-management/guidance-for-reporting-organisations/emission-factors/"
+          >Click here</a
+        >
+      </p>
+    </div>
+  </div>
+  <div id="references">
+    <h1 class="climate-title">Home page references</h1>
+    <p>
+      Reference for carbon emission reduction techniques
+      <a href="https://www.carbonfootprint.com/minimisecfp.html">Click here </a>
+    </p>
+    <p>
+      Reference for carbon dioxide information
+      <a
+        href="https://www.moretrees.eco/blogs/why-is-carbon-dioxide-harmful-to-the-environment#:~:text=The%20problem%20is%20that%20carbon,gases%20at%20a%20steady%20rate."
+        >Click here
+      </a>
+    </p>
+  </div>
+</div>
+
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='javascript/homePage/leaderboard.js') }}"
+></script>
+{% endblock %}
